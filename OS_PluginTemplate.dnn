@@ -1,6 +1,6 @@
 ﻿<dotnetnuke type="Package" version="5.0">
 	<packages>
-		<package name="OS_PluginTemplate" type="Module" version="1.0.1">
+		<package name="OS_PluginTemplate" type="Module" version="1.0.0">
 			<friendlyName>OS_PluginTemplate</friendlyName>
 			<description>OS_PluginTemplate: Depot Admin for NBS</description>
 			<iconFile />

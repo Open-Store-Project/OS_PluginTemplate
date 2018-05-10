@@ -26,7 +26,7 @@ namespace OpenStore.Providers.OS_PluginTemplate
 
         public override string ProcessCommand(string paramCmd, HttpContext context, string editlang = "")
         {
-            if (!NBrightBuyUtils.CheckRights())
+            if (!CheckRights())
             {
                 return "Security Error.";
             }

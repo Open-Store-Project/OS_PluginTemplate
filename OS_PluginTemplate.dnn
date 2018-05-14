@@ -21,7 +21,7 @@
 					<resourceFiles>
 						<basePath>DesktopModules\NBright\OS_PluginTemplate</basePath>
 						<resourceFile>
-							<name>OS_PluginTemplate_Resource.zip</name>
+							<name>Resource.zip</name>
 						</resourceFile>
 					</resourceFiles>
 				</component>

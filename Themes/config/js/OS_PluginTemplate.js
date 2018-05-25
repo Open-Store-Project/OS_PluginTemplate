@@ -75,61 +75,6 @@ function nbxgetCompleted(e) {
         // PROCESS DETAIL
         OS_PluginTemplate_DetailButtons();
 
-        if ($('input:radio[name=typeselectradio]:checked').val() == "cat") {
-            $('.catdisplay').show();
-            $('.propdisplay').hide();
-        } else {
-            $('.catdisplay').hide();
-            $('.propdisplay').show();
-        }
-
-        $('input:radio[name=typeselectradio]').unbind('change');
-        $('input:radio[name=typeselectradio]').change(function () {
-            if ($(this).val() == 'cat') {
-                $('.catdisplay').show();
-                $('.propdisplay').hide();
-            } else {
-                $('.catdisplay').hide();
-                $('.propdisplay').show();
-            }
-        });
-
-        if ($('input:radio[name=applydiscounttoradio]:checked').val() == "1") {
-            $('.applyproperty').hide();
-        } else {
-            $('.applyproperty').show();
-        }
-
-        $('input:radio[name=applydiscounttoradio]').unbind('change');
-        $('input:radio[name=applydiscounttoradio]').change(function () {
-            if ($(this).val() == '1') {
-                $('.applyproperty').hide();
-            } else {
-                $('.applyproperty').show();
-            }
-        });
-
-        if ($('.applydaterangechk').is(":checked")) {
-            $('.applydaterange').show();
-        }
-
-        $('.applydaterangechk').unbind('change');
-        $('.applydaterangechk').change(function () {
-            if ($(this).is(":checked")) {
-                $('.applydaterange').show();
-            } else {
-                $('.applydaterange').hide();
-            }
-        });
-
-        $('#cmdrecalcpromo').unbind('click');
-        $('#cmdrecalcpromo').click(function () {
-            if (confirm($('#deletemsg').val())) {
-                $('.processing').show();
-                nbxget('os_plugintemplate_recalc', '#selectparams', '#editdata'); // do ajax call to get edit form
-            }
-        });
-
         $('.processing').hide(); 
 
     } else {
@@ -141,9 +86,6 @@ function nbxgetCompleted(e) {
             $('#selecteditemid').val($(this).attr("itemid")); // assign the sleected itemid, so the server knows what item is being edited
             nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata'); // do ajax call to get edit form
         });
-        $(".catdisplay").prop("disabled", true);
-        $(".propdisplay").prop("disabled", true);
-
         $('.processing').hide(); 
     }
 

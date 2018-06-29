@@ -102,9 +102,37 @@ namespace OpenStore.Providers.OS_PluginTemplate
             }
             else
             {
+
+                var pagenumber = ajaxInfo.GetXmlPropertyInt("genxml/hidden/pagenumber");
+                var pagesize = ajaxInfo.GetXmlPropertyInt("genxml/hidden/pagesize");
+
+                if (pagenumber == 0) pagenumber = 1;
+                if (pagesize == 0) pagesize = 20;
+
+                var filter = "";
+                var searchText = ajaxInfo.GetXmlProperty("genxml/hidden/searchtext");
+                if (searchText != "")
+                {
+                    filter += " and ( ";
+                    filter += " (([xmldata].value('(genxml/textbox/ref)[1]', 'nvarchar(max)') like '%" + searchText + "%' collate sql_latin1_general_cp1_ci_ai ))";
+                    filter += " or (([xmldata].value('(genxml/lang/genxml/textbox/ref2)[1]', 'nvarchar(max)') like '%" + searchText + "%' collate sql_latin1_general_cp1_ci_ai ))";
+                    filter += " ) ";
+                }
+
+                // get only entity type required
+                var recordcount = objCtrl.GetListCount(PortalSettings.Current.PortalId, -1, typeCode, filter);
+
+
                 // Return list of items
-                var l = objCtrl.GetList(PortalSettings.Current.PortalId, Convert.ToInt32(moduleid), typeCode, "", " order by [XMLData].value('(genxml/textbox/ref)[1]','nvarchar(50)')", 0, 0, 0, 0, editlang);
+                var l = objCtrl.GetList(PortalSettings.Current.PortalId, Convert.ToInt32(moduleid), typeCode, filter, " order by [XMLData].value('(genxml/textbox/ref)[1]','nvarchar(50)')", 0, pagenumber, pagesize, recordcount, editlang);
                 strOut = NBrightBuyUtils.RazorTemplRenderList("datalist.cshtml", Convert.ToInt32(moduleid), editlang, l, templateControl, "config", editlang, StoreSettings.Current.Settings());
+
+                if (recordcount > pagesize)
+                {
+                    var pg = new NBrightCore.controls.PagingCtrl();
+                    strOut += pg.RenderPager(recordcount, pagesize, pagenumber);
+                }
+
             }
 
             return strOut;

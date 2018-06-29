@@ -68,6 +68,30 @@ function nbxgetCompleted(e) {
 
     if (e.cmd == 'os_plugintemplate_getdata') {
         $('.processing').hide();
+
+        $('#OS_PluginTemplate_cmdSearch').unbind("click");
+        $('#OS_PluginTemplate_cmdSearch').click(function () {
+            $('.processing').show();
+            $('#pagenumber').val('1');
+            $('#searchtext').val($('#OrderAdmin_searchtext').val());
+            nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata');
+        });
+
+        $('#OS_PluginTemplate_cmdReset').unbind("click");
+        $('#OS_PluginTemplate_cmdReset').click(function () {
+            $('.processing').show();
+            $('#pagenumber').val('1');
+            $('#searchtext').val('');
+            nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata');
+        });
+
+        $('.cmdPg').unbind("click");
+        $('.cmdPg').click(function () {
+            $('.processing').show();
+            $('#pagenumber').val($(this).attr('pagenumber'));
+            nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata');
+        });
+
     }
 
     // check if we are displaying a list or the detail and do processing.

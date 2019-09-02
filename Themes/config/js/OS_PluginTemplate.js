@@ -44,29 +44,29 @@ $(document).on("nbxgetcompleted", nbxgetCompleted); // assign a completed event 
 
 function nbxgetCompleted(e) {
 
-    if (e.cmd == 'os_plugintemplate_addnew') {
+    if (e.cmd === 'os_plugintemplate_addnew') {
         $('#newitem').val(''); // clear item so if new was just created we don;t create another record
         $('#selecteditemid').val($('#itemid').val()); // move the itemid into the selecteditemid, so page knows what itemid is being edited
         OS_PluginTemplate_DetailButtons();
         $('.processing').hide(); 
     }
 
-    if (e.cmd == 'os_plugintemplate_deleterecord') {
+    if (e.cmd === 'os_plugintemplate_deleterecord') {
         $('#selecteditemid').val(''); // clear selecteditemid, it now doesn;t exists.
         nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata');// relist after delete
     }
 
-    if (e.cmd == 'os_plugintemplate_savedata') {
+    if (e.cmd === 'os_plugintemplate_savedata') {
         $('#selecteditemid').val(''); // clear sleecteditemid.        
         nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata');// relist after save
     }
 
-    if (e.cmd == 'os_plugintemplate_selectlang') {
+    if (e.cmd === 'os_plugintemplate_selectlang') {
         $('#editlang').val($('#nextlang').val()); // alter lang after, so we get correct data record
         nbxget('os_plugintemplate_getdata', '#selectparams', '#editdata'); // do ajax call to get edit form
     }
 
-    if (e.cmd == 'os_plugintemplate_getdata') {
+    if (e.cmd === 'os_plugintemplate_getdata') {
         $('.processing').hide();
 
         $('#OS_PluginTemplate_cmdSearch').unbind("click");
@@ -95,7 +95,7 @@ function nbxgetCompleted(e) {
     }
 
     // check if we are displaying a list or the detail and do processing.
-    if (($('#selecteditemid').val() != '') || (e.cmd == 'os_plugintemplate_addnew')) {
+    if (($('#selecteditemid').val() !== '') || (e.cmd === 'os_plugintemplate_addnew')) {
         // PROCESS DETAIL
         OS_PluginTemplate_DetailButtons();
 

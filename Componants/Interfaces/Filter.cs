@@ -12,7 +12,7 @@ namespace OpenStore.Providers.OS_PluginTemplate
 {
     public class Filter : Nevoweb.DNN.NBrightBuy.Components.Interfaces.FilterInterface
     {
-        public override string GetFilter(string currentFilter, NavigationData navigationData, ModSettings setting, HttpContext context)
+        public override string GetFilter(string currentFilter, NavigationData navigationData, ModSettings setting, NBrightInfo brightInfo)
         {
             throw new NotImplementedException();
         }
